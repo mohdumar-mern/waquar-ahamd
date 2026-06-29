@@ -68,7 +68,7 @@ Thumbs.db
 # Uploads (Optional)
 # =========================
 uploads/
-public/uploads/
+# public/uploads/
 
 # =========================
 # Testing
