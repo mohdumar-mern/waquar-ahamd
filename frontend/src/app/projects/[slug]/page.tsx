@@ -11,7 +11,7 @@ interface Props { params: { slug: string } }
 // Dynamic metadata per project — great for SEO
 export async function generateMetadata({ params }: Props) {
   try {
-    const res = await api<ApiResponse<Project>>(`${apiConfig.endpoints.projects}/${params.slug}`);
+    const res = await api.get<ApiResponse<Project>>(`${apiConfig.endpoints.projects}/${params.slug}`);
     const p   = res.data;
     return genMeta({
       title      : p.metaTitle || p.title,
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
 // Pre-generate static paths at build time
 export async function generateStaticParams() {
   try {
-    const res = await api<{ data: { data: Project[] } }>(apiConfig.endpoints.projects);
+    const res = await api.get<{ data: { data: Project[] } }>(apiConfig.endpoints.projects);
     return res.data.data.map(p => ({ slug: p.slug }));
   } catch { return []; }
 }
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 export default async function ProjectPage({ params }: Props) {
   let project: Project;
   try {
-    const res = await api<ApiResponse<Project>>(`${apiConfig.endpoints.projects}/${params.slug}`);
+    const res = await api.get<ApiResponse<Project>>(`${apiConfig.endpoints.projects}/${params.slug}`);
     project = res.data;
   } catch { notFound(); }
 
