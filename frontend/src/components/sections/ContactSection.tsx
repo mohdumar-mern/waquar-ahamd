@@ -32,7 +32,7 @@ export default function ContactSection() {
     }
     setLoading(true);
     try {
-      await api(apiConfig.endpoints.contact, { method: "POST", body: JSON.stringify(form) } as RequestInit);
+      await api.post(apiConfig.endpoints.contact, { method: "POST", body: JSON.stringify(form) } as RequestInit);
       setSuccess(true);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to send. Please email directly.");
