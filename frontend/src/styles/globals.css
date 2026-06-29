@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --racing-red      : #e8000d;
+  --racing-red-dim  : #7a0008;
+  --racing-red-glow : rgba(232,0,13,0.4);
+  --carbon          : #0d0d0d;
+  --chrome          : #cccccc;
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Selection */
+::selection { background: var(--racing-red); color: white; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--racing-red); border-radius: 2px; }
+
+/* Canvas performance */
+canvas { display: block; touch-action: none; }
+
+/* Prevent FOUC on 3D sections */
+.three-canvas-wrapper { opacity: 0; transition: opacity 0.5s ease; }
+.three-canvas-wrapper.loaded { opacity: 1; }
