@@ -8,7 +8,6 @@ const nextConfig = {
   // },
 
   compress: true,
-
   images: {
     domains: ["res.cloudinary.com", "localhost"],
     formats: ["image/avif", "image/webp"],
