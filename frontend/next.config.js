@@ -2,17 +2,19 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  // Performance: compress responses
+  // ✅ THIS IS THE FIX — required for App Router in Next.js 14.0.4
+  // experimental: {
+  //   appDir: true,
+  // },
+
   compress: true,
 
-  // Image optimization
   images: {
     domains: ["res.cloudinary.com", "localhost"],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
   },
 
-  // Security headers
   async headers() {
     return [
       {
@@ -26,9 +28,6 @@ const nextConfig = {
       },
     ];
   },
-
-  // Bundle analysis (npm i @next/bundle-analyzer to enable)
-  // webpack: (config) => { config.resolve.alias["three"] = "three"; return config; },
 };
 
 module.exports = nextConfig;

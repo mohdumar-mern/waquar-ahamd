@@ -1,10 +1,12 @@
 "use client";
+
 import { useEffect, useRef } from "react";
-import { useScrollPhase }   from "@/hooks/useScrollPhase";
-import { useScrollStore }   from "@/store/useScrollStore";
-import { useUIStore }       from "@/store/useUIStore";
-import HUDOverlay           from "@/components/ui/HUDOverlay";
-import ScrollIndicator      from "@/components/ui/ScrollIndicator";
+import type { LineBasicMaterial } from "three";
+import { useScrollPhase } from "@/hooks/useScrollPhase";
+import { useScrollStore } from "@/store/useScrollStore";
+import { useUIStore } from "@/store/useUIStore";
+import HUDOverlay from "@/components/ui/HUDOverlay";
+import ScrollIndicator from "@/components/ui/ScrollIndicator";
 
 // Three.js is imported dynamically to avoid SSR issues
 let THREE: typeof import("three") | null = null;
@@ -119,9 +121,11 @@ export default function HeroSection() {
           // Speed lines opacity
           const speedT = phase >= 3 ? Math.min((scroll - 0.4) / 0.25, 1) : 0;
           speedLines.forEach((l) => {
-            (l.material as THREE.LineBasicMaterial).opacity = speedT * 0.5;
+            const material = l.material as LineBasicMaterial;
+            material.opacity = speedT * 0.5;
             l.position.z = carZ;
           });
+          
 
           renderer.render(scene, camera);
         };
