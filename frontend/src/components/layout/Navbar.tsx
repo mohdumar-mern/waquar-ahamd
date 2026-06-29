@@ -8,14 +8,14 @@ import { navVariants } from "@/lib/gsap/transitions";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "WORK",     href: "/work"     },
+  { label: "WORK", href: "/work" },
   { label: "PROJECTS", href: "/projects" },
-  { label: "ABOUT",    href: "/about"    },
-  { label: "CONTACT",  href: "/contact"  },
+  { label: "ABOUT", href: "/about" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 export default function Navbar() {
-  const progress    = useScrollProgress();
+  const progress = useScrollProgress();
   const { isMenuOpen, toggleMenu, closeMenu } = useUIStore();
   const [scrolled, setScrolled] = useState(false);
 
@@ -27,9 +27,8 @@ export default function Navbar() {
         variants={navVariants}
         initial="hidden"
         animate="visible"
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-          scrolled ? "bg-black/80 backdrop-blur-md border-b border-white/5" : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled ? "bg-black/80 backdrop-blur-md border-b border-white/5" : "bg-transparent"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
           {/* Logo */}
@@ -81,19 +80,23 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-30 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center gap-8"
           >
-            {NAV_LINKS.map(({ label, href }, i) => (
-              <motion.Link
-                key={label}
-                href={href}
-                onClick={closeMenu}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.07 }}
-                className="text-2xl tracking-[8px] text-white/70 hover:text-racing-red transition-colors"
-              >
-                {label}
-              </motion.Link>
-            ))}
+            {NAV_LINKS.map(({ label, href }, i) => {
+              const MotionLink = motion(Link);
+
+              return (
+                <MotionLink
+                  key={label}
+                  href={href}
+                  onClick={closeMenu}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                  className="text-2xl tracking-[8px] text-white/70 hover:text-racing-red transition-colors"
+                >
+                  {label}
+                </MotionLink>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
